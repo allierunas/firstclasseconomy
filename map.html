@@ -51,9 +51,21 @@
 						</div>
 					</div>
 					<div id="seat-map">
-					<div class="front-indicator">Front</div>
+						<div class="front-indicator">Front</div>
 					
-				</div>
+					</div>
+					<div class="booking-details">
+						<h2>Booking Details</h2>
+					
+						<h3> Selected Seats (<span id="counter">0</span>):</h3>
+						<ul id="selected-seats"></ul>
+					
+						Total: <b>$<span id="total">0</span></b>
+					
+						<button class="checkout-button">Checkout &raquo;</button>
+					
+						<div id="legend"></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -83,8 +95,8 @@
 					$total = $('#total'),
 					sc = $('#seat-map').seatCharts({
 					map: [
-						'ff_ff',
-						'ff_ff',
+						'ee_ee',
+						'ee_ee',
 						'ee_ee',
 						'ee_ee',
 						'ee___',
@@ -115,8 +127,7 @@
 					legend : {
 						node : $('#legend'),
 					    items : [
-							[ 'f', 'available',   'First Class' ],
-							[ 'e', 'available',   'Economy Class'],
+							[ 'e', 'available',   'Open'],
 							[ 'f', 'unavailable', 'Already Booked']
 					    ]					
 					},
@@ -179,6 +190,16 @@
 			
 			return total;
 		}
+		
+		
+		fetch('https://api.thingspeak.com/channels/606482/fields/1/last.json')
+		var resp = 1;
+		.then(function(response) {
+			var = response.json();
+		})
+		.then(function(myJson) {
+			console.log(JSON.stringify(myJson));
+		});
 		
 		</script>
 	
