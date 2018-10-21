@@ -38,7 +38,7 @@
 					node   : null,
 					items  : []
 				},
-				click   : function() {
+				/*click   : function() {
 
 					if (this.status() == 'available') {
 						return 'selected';
@@ -48,7 +48,7 @@
 						return this.style();
 					}
 					
-				},
+				},*/
 				focus  : function() {
 
 					if (this.status() == 'available') {
