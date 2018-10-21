@@ -126,7 +126,8 @@
 				});
 
 				//let's pretend some seats have already been booked
-				sc.get(['1_2', '4_1', '7_1', '7_2']).status('unavailable');
+				//sc.get(['1_2', '4_1', '7_1', '7_2']).status('unavailable');
+				seatSat(sc);
 		
 		});
 
@@ -139,6 +140,26 @@
 			});
 			
 			return total;
+		}
+		
+		function seatSat(sc){
+		
+		var resp = "0";
+		
+			/*	fetch('https://api.thingspeak.com/channels/606482/fields/1/last.txt')
+								var resp = "1";
+								.then(function(response) {
+								resp = response.json();
+								})
+							.then(function(myJson) {
+								console.log(JSON.stringify(myJson));
+							});*/
+				if(resp == "1"){
+					sc.get(['1_2', '4_1', '7_1', '7_2']).status('unavailable');
+				}
+				else{
+					sc.get(['1_2', '4_1', '7_1', '7_2']).status('available');
+				}
 		}
 		
 		</script>
