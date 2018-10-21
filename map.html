@@ -87,8 +87,10 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script src="assets/js/jquery.seat-charts.js"></script>
 		
-		<script>
+<script>
 			var firstSeatLabel = 1;
+			var ind = "0";
+			const url = 'https://api.thingspeak.com/channels/606482/fields/1/last.json';
 		
 			$(document).ready(function() {
 				var $cart = $('#selected-seats'),
@@ -96,8 +98,8 @@
 					$total = $('#total'),
 					sc = $('#seat-map').seatCharts({
 					map: [
-						'ee_ee',
-						'ee_ee',
+						'ff_ff',
+						'ff_ff',
 						'ee_ee',
 						'ee_ee',
 						'ee___',
@@ -128,7 +130,8 @@
 					legend : {
 						node : $('#legend'),
 					    items : [
-							[ 'e', 'available',   'Open'],
+							[ 'f', 'available',   'First Class' ],
+							[ 'e', 'available',   'Economy Class'],
 							[ 'f', 'unavailable', 'Already Booked']
 					    ]					
 					},
@@ -145,18 +148,6 @@
 							 *
 							 * .find function will not find the current seat, because it will change its stauts only after return
 							 * 'selected'. This is why we have to add 1 to the length and the current seat price to the total.
-							 *
-							 *
-							 *fetch('https://api.thingspeak.com/channels/606482/fields/1/last.json')
-								var resp = 1;
-								.then(function(response) {
-								var = response.json();
-								})
-							.then(function(myJson) {
-								console.log(JSON.stringify(myJson));
-							});
-							 *
-							 *
 							 */
 							$counter.text(sc.find('selected').length+1);
 							$total.text(recalculateTotal(sc)+this.data().price);
@@ -189,11 +180,30 @@
 				});
 
 				//let's pretend some seats have already been booked
-				sc.get(['1_2', '4_1', '7_1', '7_2']).status('unavailable');
+				//sc.get(['1_2', '4_1', '7_1', '7_2']).status('unavailable');
+				//seatSat(sc, ind);
+				
+				function checkTS(sc){
+					$.ajax({
+						url:url,
+						success: function(response){
+							console.log(response);
+							if(response.field1 == 1)
+								sc.get(['4_4']).status('unavailable');
+							else	
+								sc.get(['4_4']).status('available');
+						}	
+					});
+				}
+		
+				window.setInterval(function(){
+					/// call your function here
+					checkTS(sc);
+				}, 1000);
+		
+				
 		
 		});
-		
-		
 
 		function recalculateTotal(sc) {
 			var total = 0;
@@ -206,8 +216,33 @@
 			return total;
 		}
 		
+		function seatSat(sc, ind){
+		
+			var resp = ind;
+				if(resp == "1"){
+					sc.get(['1_2', '4_1', '7_1', '7_2']).status('unavailable');
+				}
+				else{
+					sc.get(['1_2', '4_1', '7_1', '7_2']).status('available');
+				}
+		}
 		
 		
+		
+		/*function UserAction(){
+		
+		  fetch(url)
+		  .then((resp) => resp.text())
+		  .then(function(data) {
+			let ind = data.results;
+			seatSat(sc, ind);
+		  })
+		  .catch(function(error) {
+			console.log(error);
+		  });   
+		
+		}*/
+
 		
 		</script>
 	
