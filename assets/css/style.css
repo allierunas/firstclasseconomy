@@ -1,5 +1,5 @@
 body {
-	font-family: 'Lato', sans-serif;
+	font-family: 'Helvetica', sans-serif;
 }
 a {
 	color: #b71a4c;
@@ -154,7 +154,7 @@ span.seatCharts-legendDescription {
 }
 
 .sidebar-nav {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Helvetica', sans-serif;
   font-size: 20px;
   line-height: 70px;
   padding-top: 110px;
