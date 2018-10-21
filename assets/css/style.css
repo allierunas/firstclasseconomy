@@ -254,7 +254,7 @@ span.seatCharts-legendDescription {
 }
 
 .navbar {
-    background-color: #ffffff;
+    background-color: #F9B612;
 }
 
 .sidebar-nav li { padding: 0px; }
@@ -266,7 +266,7 @@ span.seatCharts-legendDescription {
 }
 
 .sidebar-nav li:hover {
-    background-color: black;
+    background-color: #3453C4;
     text-decoration: none;
 }
 
